@@ -59,8 +59,24 @@ startGame(cardList)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+let openCards = []
 function displayCardSymbol(event) {
-    event.target.classList.add('open', 'show');
+    const card = event.target;
+    card.classList.add('open', 'show');
+    openCards.push(card);
+    if (openCards.length == 2) {
+        hideOpenCards(openCards)
+        openCards = []
+    };
+}
+
+function hideOpenCards(openCards) {
+        setTimeout(function() {
+            for (let card of openCards) {
+                    console.log(card)
+                    card.classList.remove('open', 'show');
+            };
+        }, 1000);
 }
 
 deck.addEventListener('click', displayCardSymbol)
