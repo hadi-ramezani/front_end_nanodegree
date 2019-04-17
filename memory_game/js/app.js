@@ -34,6 +34,7 @@ function startGame(cardList) {
     };
     deck.innerHTML = cardsHTML.join('');
     moves.innerText = moveCounter;
+    updateStars();
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -83,14 +84,29 @@ function isMatch(openCards){
     return false;
 }
 
+function incrementMoveCounter() {
+    moveCounter = moveCounter + 1;
+    moves.innerText = moveCounter;
+}
+
+function updateStars() {
+    const stars = document.querySelector('.stars')
+    const starsList = stars.getElementsByTagName("i");
+    let starsLeft = 3 - Math.floor(moveCounter / 10);
+    for (let i = starsLeft; i < starsList.length; i++) {
+        console.log(i);
+        starsList[i].className = "fa fa-star-o";
+    }
+}
+
 function displayCardSymbol(event) {
     const card = event.target; /* make sure to only capture card click here */
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
         card.classList.add('open', 'show');
         openCards.push(card);
         if (openCards.length == 2) {
-            moveCounter = moveCounter + 1;
-            moves.innerText = moveCounter;
+            incrementMoveCounter();
+            updateStars();
             if (!isMatch(openCards)) {
                 hideOpenCards(openCards)
             };
