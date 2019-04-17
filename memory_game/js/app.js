@@ -20,7 +20,9 @@ let timerInterval = null;
 let elapsedTime = 0;
 
 /**
- * Return the html content of a card by adding appropriate data-card and class name
+ * @description Return the html content of a card by adding appropriate data-card and class name
+ * @param
+ * @returns
  */
 function createCardHTML(card) {
     return  `<li class="card" data-card=${card}>
@@ -29,8 +31,10 @@ function createCardHTML(card) {
 }
 
 /**
- * Start a game by first shuffling a list of cards and then creating the html content for the card deck. Also, start the
+ * @description Start a game by first shuffling a list of cards and then creating the html content for the card deck. Also, start the
  timer.
+ * @param
+ * @returns
  */
 function startGame(cardList) {
     cardList = shuffle(cardList)
@@ -60,7 +64,9 @@ function shuffle(array) {
 }
 
 /**
- * Hide open cards if there was not match.
+ * @description Hide open cards if there was not match.
+ * @param
+ * @returns
  */
 function hideOpenCards(openCards) {
         setTimeout(function() {
@@ -71,7 +77,8 @@ function hideOpenCards(openCards) {
 }
 
 /**
- * Show a model once a game has finished to include the summary and give the user a chance to play again.
+ * @description Show a model once a game has finished to include the summary and give the user a chance to play again.
+ * @returns
  */
 function showModal(){
     const modal = document.getElementById('myModal');
@@ -103,7 +110,9 @@ function showModal(){
 }
 
 /**
- * Check if there's a match or if the game has finished, then take an appropriate action.
+ * @description Check if there's a match or if the game has finished, then take an appropriate action.
+ * @param
+ * @returns
  */
 function isMatch(openCards){
     if (openCards[0].dataset.card == openCards[1].dataset.card) {
@@ -120,7 +129,8 @@ function isMatch(openCards){
 }
 
 /**
- * Increment the counter for the number of moves, and update the text content of the move element.
+ * @description Increment the counter for the number of moves, and update the text content of the move element.
+ * @returns
  */
 function incrementMoveCounter() {
     moveCounter = moveCounter + 1;
@@ -128,7 +138,8 @@ function incrementMoveCounter() {
 }
 
 /**
- * Update the number of stars on the page depending on the number of the moves that has been made.
+ * @description Update the number of stars on the page depending on the number of the moves that has been made.
+ * @returns
  */
 function updateStars() {
     const stars = document.querySelector('.stars')
@@ -140,8 +151,10 @@ function updateStars() {
 }
 
 /**
- * When user clicks on a card, display the card, then call other functions to update stars, increment counter, and
+ * @description When user clicks on a card, display the card, then call other functions to update stars, increment counter, and
  hide the cards if no match.
+ * @param
+ * @returns
  */
 function displayCardSymbol(event) {
     const card = event.target;
@@ -162,7 +175,8 @@ function displayCardSymbol(event) {
 }
 
 /**
- * Start a timer
+ * @description Start a timer
+ * @returns
  */
 function startTimer() {
   stopTimer();
@@ -171,20 +185,22 @@ function startTimer() {
 }
 
 /**
- * Update the displayed time on the screen
+ * @description Update the displayed time on the screen
+ * @returns
  */
 function changeTimerValue() {
       document.querySelector(".time").innerHTML = ` ${++elapsedTime} sec`;
 }
 
 /**
- * Stop the timer
+ * @description Stop the timer
+ * @returns
  */
 function stopTimer() {
   clearInterval(timerInterval);
 }
 
-// start the game
+// Start the game
 const deck = document.querySelector(".deck");
 const restart = document.querySelector(".restart");
 const moves = document.querySelector(".moves");
