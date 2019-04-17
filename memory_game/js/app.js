@@ -60,7 +60,7 @@ function shuffle(array) {
 }
 
 /**
- * Hide open cards if here was not match.
+ * Hide open cards if there was not match.
  */
 function hideOpenCards(openCards) {
         setTimeout(function() {
@@ -70,6 +70,9 @@ function hideOpenCards(openCards) {
         }, 500);
 }
 
+/**
+ * Show a model once a game has finished to include the summary and give the user a chance to play again.
+ */
 function showModal(){
     const modal = document.getElementById('myModal');
     modal.style.display = "block";
@@ -93,32 +96,40 @@ function showModal(){
         };
     };
 
+    // When the use clicks on play again button, restart the game
     playAgain.onclick = function(event) {
-        console.log(event);
         window.location.reload();
     };
 }
 
+/**
+ * Check if there's a match or if the game has finished, then take an appropriate action.
+ */
 function isMatch(openCards){
     if (openCards[0].dataset.card == openCards[1].dataset.card) {
-        openCards[0].classList.add('match');
-        openCards[1].classList.add('match');
+        openCards[0].classList.add('match', 'animate');
+        openCards[1].classList.add('match', 'animate');
         matchCounter += 1;
         if (matchCounter == 8) {
             stopTimer()
             showModal()
-            console.log("You won");
         };
         return true;
     };
     return false;
 }
 
+/**
+ * Increment the counter for the number of moves, and update the text content of the move element.
+ */
 function incrementMoveCounter() {
     moveCounter = moveCounter + 1;
     moves.innerText = moveCounter;
 }
 
+/**
+ * Update the number of stars on the page depending on the number of the moves that has been made.
+ */
 function updateStars() {
     const stars = document.querySelector('.stars')
     const starsList = stars.getElementsByTagName("i");
@@ -128,6 +139,10 @@ function updateStars() {
     }
 }
 
+/**
+ * When user clicks on a card, display the card, then call other functions to update stars, increment counter, and
+ hide the cards if no match.
+ */
 function displayCardSymbol(event) {
     const card = event.target;
     if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
@@ -146,20 +161,30 @@ function displayCardSymbol(event) {
     };
 }
 
+/**
+ * Start a timer
+ */
 function startTimer() {
   stopTimer();
   elapsedTime = 0;
   timerInterval = setInterval(changeTimerValue, 1000);
 }
 
+/**
+ * Update the displayed time on the screen
+ */
 function changeTimerValue() {
       document.querySelector(".time").innerHTML = ` ${++elapsedTime} sec`;
 }
 
+/**
+ * Stop the timer
+ */
 function stopTimer() {
   clearInterval(timerInterval);
 }
 
+// start the game
 const deck = document.querySelector(".deck");
 const restart = document.querySelector(".restart");
 const moves = document.querySelector(".moves");
