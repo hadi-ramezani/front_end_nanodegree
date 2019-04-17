@@ -16,10 +16,12 @@ cardList = ["fa-diamond", "fa-diamond",
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-const deck = document.querySelector(".deck");
+let openCards = [];
+let moveCounter = 0;
+let matchCounter = 0;
 
 function createCardHTML(card) {
-    return  `<li class="card">
+    return  `<li class="card" data-card=${card}>
                 <i class="fa ${card}"></i>
             </li>`
 }
@@ -31,6 +33,7 @@ function startGame(cardList) {
         cardsHTML.push(createCardHTML(card))
     };
     deck.innerHTML = cardsHTML.join('');
+    moves.innerText = moveCounter;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -48,7 +51,6 @@ function shuffle(array) {
     return array;
 }
 
-startGame(cardList)
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -59,24 +61,47 @@ startGame(cardList)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-let openCards = []
-function displayCardSymbol(event) {
-    const card = event.target;
-    card.classList.add('open', 'show');
-    openCards.push(card);
-    if (openCards.length == 2) {
-        hideOpenCards(openCards)
-        openCards = []
-    };
-}
 
 function hideOpenCards(openCards) {
         setTimeout(function() {
             for (let card of openCards) {
-                    console.log(card)
                     card.classList.remove('open', 'show');
             };
-        }, 1000);
+        }, 500);
 }
 
-deck.addEventListener('click', displayCardSymbol)
+function isMatch(openCards){
+    if (openCards[0].dataset.card == openCards[1].dataset.card) {
+        openCards[0].classList.add('match');
+        openCards[1].classList.add('match');
+        matchCounter += 1;
+        if (matchCounter == 8) {
+            console.log("You won");
+        };
+        return true;
+    };
+    return false;
+}
+
+function displayCardSymbol(event) {
+    const card = event.target; /* make sure to only capture card click here */
+    if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+        card.classList.add('open', 'show');
+        openCards.push(card);
+        if (openCards.length == 2) {
+            moveCounter = moveCounter + 1;
+            moves.innerText = moveCounter;
+            if (!isMatch(openCards)) {
+                hideOpenCards(openCards)
+            };
+            openCards = [];
+        };
+    };
+}
+
+const deck = document.querySelector(".deck");
+const restart = document.querySelector(".restart");
+const moves = document.querySelector(".moves");
+//restart.addEventListener('click', startGame);
+deck.addEventListener('click', displayCardSymbol);
+startGame(cardList);
