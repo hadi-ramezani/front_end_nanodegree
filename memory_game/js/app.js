@@ -21,8 +21,8 @@ let elapsedTime = 0;
 
 /**
  * @description Return the html content of a card by adding appropriate data-card and class name
- * @param
- * @returns
+ * @param {string} card - The class name of a card
+ * @returns {string} - The html content of a card
  */
 function createCardHTML(card) {
     return  `<li class="card" data-card=${card}>
@@ -33,8 +33,8 @@ function createCardHTML(card) {
 /**
  * @description Start a game by first shuffling a list of cards and then creating the html content for the card deck. Also, start the
  timer.
- * @param
- * @returns
+ * @param {list} - The list of the card classes
+ * @returns null
  */
 function startGame(cardList) {
     cardList = shuffle(cardList)
@@ -65,8 +65,8 @@ function shuffle(array) {
 
 /**
  * @description Hide open cards if there was not match.
- * @param
- * @returns
+ * @param {list} - A list of open cards (html elements)
+ * @returns null
  */
 function hideOpenCards(openCards) {
         setTimeout(function() {
@@ -78,7 +78,7 @@ function hideOpenCards(openCards) {
 
 /**
  * @description Show a model once a game has finished to include the summary and give the user a chance to play again.
- * @returns
+ * @returns null
  */
 function showModal(){
     const modal = document.getElementById('myModal');
@@ -111,8 +111,8 @@ function showModal(){
 
 /**
  * @description Check if there's a match or if the game has finished, then take an appropriate action.
- * @param
- * @returns
+ * @param {list} - A list of open cards (html elements)
+ * @returns {boolean} - True of there is a match, false otherwise.
  */
 function isMatch(openCards){
     if (openCards[0].dataset.card == openCards[1].dataset.card) {
@@ -130,7 +130,7 @@ function isMatch(openCards){
 
 /**
  * @description Increment the counter for the number of moves, and update the text content of the move element.
- * @returns
+ * @returns null
  */
 function incrementMoveCounter() {
     moveCounter = moveCounter + 1;
@@ -139,7 +139,7 @@ function incrementMoveCounter() {
 
 /**
  * @description Update the number of stars on the page depending on the number of the moves that has been made.
- * @returns
+ * @returns null
  */
 function updateStars() {
     const stars = document.querySelector('.stars')
@@ -153,8 +153,8 @@ function updateStars() {
 /**
  * @description When user clicks on a card, display the card, then call other functions to update stars, increment counter, and
  hide the cards if no match.
- * @param
- * @returns
+ * @param {event object}
+ * @returns null
  */
 function displayCardSymbol(event) {
     const card = event.target;
@@ -176,7 +176,7 @@ function displayCardSymbol(event) {
 
 /**
  * @description Start a timer
- * @returns
+ * @returns null
  */
 function startTimer() {
   stopTimer();
@@ -186,7 +186,7 @@ function startTimer() {
 
 /**
  * @description Update the displayed time on the screen
- * @returns
+ * @returns null
  */
 function changeTimerValue() {
       document.querySelector(".time").innerHTML = ` ${++elapsedTime} sec`;
@@ -194,7 +194,7 @@ function changeTimerValue() {
 
 /**
  * @description Stop the timer
- * @returns
+ * @returns null
  */
 function stopTimer() {
   clearInterval(timerInterval);
