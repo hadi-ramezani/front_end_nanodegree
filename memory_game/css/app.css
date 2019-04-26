@@ -33,6 +33,10 @@ h1 {
     font-weight: 300;
 }
 
+img, embed, object, video {
+    max-width: 100%;
+}
+
 /*
  * Styles for the deck of cards
  */
@@ -40,6 +44,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
+    max-width: 100%;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
