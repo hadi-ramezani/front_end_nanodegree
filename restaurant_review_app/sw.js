@@ -48,7 +48,7 @@ self.addEventListener('activate', function(event) {
                     return cacheName.startsWith('restaurant_') &&
                         cacheName != staticCacheName;
                 }).map(function(cacheName) {
-                    return cache.delete(cacheName);
+                    return caches.delete(cacheName);
                 })
             );
        })
