@@ -17,6 +17,6 @@ python (preferably python 3) and navigate to the project directory and run:
 
 If you have python 2 installed you can run:
 
-   python -m SimpleHTTPServer 8000
+    python -m SimpleHTTPServer 8000
 
 Then head over to your browser and visit http://localhost:8000
