@@ -343,15 +343,12 @@ nav h1 a {
     #restaurants-list li {
         max-width: 25%;
     }
-
     .filter-options h2 {
         font-size: 1.2rem;
     }
-
     .filter-options select {
         font-size: 1.4em;
     }
-
     .inside #map-container {
         background: scroll 0 0;
         height: 80%;
